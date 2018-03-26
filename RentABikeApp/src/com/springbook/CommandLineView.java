@@ -2,6 +2,7 @@ package com.springbook;
 
 import java.util.*;
 
+
 public class CommandLineView {
     private RentABike rentaBike;
 
