@@ -1,10 +1,10 @@
 package com.springbook;
 
+import  org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class RentABikeAssembler {
     public static void main (String[] args) {
-        CommandLineView cv = new CommandLineView();
-        RentABike rentaBike = new ArrayListRentABike("Bruce's Bikes");
-        cv.setRentaBike(rentaBike);
-        cv.printAllBikes();
+        ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("RentABikeApp-context.xml");
+        CommandLineView clv = (CommandLineView)ctx.getBean("commandLineView");
     }
 }

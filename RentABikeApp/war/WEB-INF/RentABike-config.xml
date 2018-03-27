@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="rentaBike" class="com.springbook.ArrayListRentABike">
+        <constructor-arg name="storeName" value="Bruce's Bike"/>
+    </bean>
+    <bean id="commandLineView" class="com.springbook.CommandLineView">
+        <property name="rentaBike" ref="rentaBike"/>
+    </bean>
+</beans>

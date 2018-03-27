@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="RentABike" default="compile" basedir="." >
+
+    <property name="src.dir" value="src"/>
+    <property name="test.dir" value="test"/>
+    <property name="test.classes.dir" value="${test.dir}/classes"/>
+    <property name="war.dir" value="war"/>
+    <property name="war.classes.dir" value="${war.dir}/WEB-INF/dist"/>
+    <property name="spring.dir" value="${war.dir}/WEB-INF"/>
+
+    <path id="bikestore.class.path">
+        <fileset dir="${spring.dir}/lib">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement location="${spring.dir}/lib/commons-logging-1.0.4.jar"/>
+        <pathelement location="${spring.dir}/lib/log4j-1.2.17.jar"/>
+        <dirset dir="${basedir}"/>
+        <dirset dir="${war.classes.dir}"/>
+
+
+    </path>
+    <path id="junit.class.path">
+        <path refid="bikestore.class.path"/>
+        <pathelement location="${test.dir}/lib/junit-4.12.jar"/>
+    </path>
+
+
+    <target name="init">
+        <mkdir  dir="${war.classes.dir}"/>
+        <mkdir  dir="${test.classes.dir}"/>
+    </target>
+
+    <target name="clean" description="Delete compiled classes">
+        <delete dir="${war.classes.dir}"/>
+        <delete dir="${test.classes.dir}"/>
+    </target>
+
+    <target name="compile" depends="init"
+            description="Compiles all source code">
+        <javac includeantruntime="false"
+               srcdir="${src.dir}"
+               destdir="${war.classes.dir}"
+               classpathref="bikestore.class.path"/>
+    </target>
+
+    <target name="test.compile" depends="init"
+            description="Compiles all test source code">
+        <javac includeantruntime="false"
+               srcdir="${test.dir}"
+               destdir="${test.classes.dir}"
+               classpathref="junit.class.path"/>
+    </target>
+
+<target name="test" depends="compile, test.compile" description="Run the unit tests">
+    <junit printsummary="withOutAndErr"
+           haltonfailure="no"
+           haltonerror="no"
+           fork="yes">
+        <classpath refid="junit.class.path"/>
+        <formatter type="xml" usefile="true"/>
+        <batchtest todir="${test.dir}">
+            <fileset dir="${test.classes.dir}">
+                <include name="*Test.*"/>
+            </fileset>
+        </batchtest>
+
+    </junit>
+
+</target>
+
+
+</project>

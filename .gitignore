@@ -23,3 +23,12 @@ hs_err_pid*
 
 #Idea IDE project files
 .idea
+*.iml
+
+#ignore test artifacts
+RentABikeApp/test/classes/*
+RentABikeApp/test/lib/*
+RentABikeApp/test/TEST*.xml
+
+#igonre build artifacts
+RentABikeApp/war/*

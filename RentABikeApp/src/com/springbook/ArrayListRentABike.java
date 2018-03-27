@@ -3,8 +3,9 @@ package com.springbook;
 import java.util.*;
 
 public class ArrayListRentABike implements RentABike {
+
     private String storeName;
-    final List<Bike> bikes = new ArrayList<Bike>();
+    private final List<Bike> bikes = new ArrayList<Bike>();
 
     public ArrayListRentABike (String storeName) {
         this.storeName = storeName;
@@ -25,10 +26,13 @@ public class ArrayListRentABike implements RentABike {
         return bikes;
     }
 
+    public String getStoreName() {
+        return storeName;
+    }
+
     public Bike getBike(String serialNo) {
         Iterator iter = bikes.iterator();
-        while (iter.hasNext()) {
-            Bike bike = (Bike)iter.next();
+        for (Bike bike: bikes){
             if(serialNo.equals(bike.getSerialNo())) return bike;
         }
         return null;
